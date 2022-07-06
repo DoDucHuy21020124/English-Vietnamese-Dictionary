@@ -1,0 +1,32 @@
+dog	con chó
+cat	con mèo
+bird	con chim
+human	con người
+leg	chân
+arm	tay
+mouse	con chuột
+chair	cái ghế
+table	cái bàn
+tree	cái cây
+book	cuốn sách
+fire	lửa
+water	nước
+grass	cỏ
+fly	bay
+dragon	rồng
+fairy	tiên
+ghost	ma
+electric	điện
+bug	bọ
+rock	đá
+ice	băng
+throw	ném
+ball	bóng
+hit	trúng
+punch	đấm
+kick	đá
+shot	bắn
+bowl	bát
+plate	đĩa
+shoes	đôi giày
+boat	con thuyền

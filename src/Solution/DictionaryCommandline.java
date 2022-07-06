@@ -57,6 +57,8 @@ public class DictionaryCommandline {
 			System.out.println("Enter number to choose: ");
 			System.out.println("1. Show all words in dictionary");
 			System.out.println("2. Lookup dictionary");
+			System.out.println("3. Edit dictionary");
+			System.out.println("4. Export dictionary to file");
 			System.out.println("0. Exit");
 			choose = scan.nextInt();
 			scan.nextLine();
@@ -66,11 +68,41 @@ public class DictionaryCommandline {
 			else if ( choose == 2 ) {
 				dictionaryManage.dictionaryLookup();
 			}
+			else if ( choose == 3 ) {
+				dictionaryManage.editDictionary();
+			}
+			else if ( choose == 4 ) {
+				dictionaryManage.dictionaryExportToFile();
+			}
 			else if ( choose == 0 ) break;
 			else {
 				System.out.println("Something went wrong :(");
 				System.out.println("Please try again!");
 			}
+		} while ( true );
+	}
+	
+	public void dictionarySearcher() throws Exception {
+		do {
+			String word = scan.nextLine();
+			int count = 0;
+			for ( int i = 0; i < dictionaryManage.dictionary.get_list_word().size(); ++i ) {
+				if ( dictionaryManage.dictionary.get_list_word().get(i).get_word_target().toLowerCase().indexOf(word.toLowerCase()) == 0 ) {
+					System.out.println((i + 1) + '.' + dictionaryManage.dictionary.get_list_word().get(i).get_word_target());
+				}
+			}
+			System.out.println("Do you want to search?");
+			System.out.println("1. Yes\n2. No");
+			int choose;
+			do {
+				choose = scan.nextInt();
+				if ( choose != 1 && choose != 2 ) {
+					System.out.println("Something went wrong :(");
+					System.out.println("Please try again!");
+				}
+				else break;
+			} while ( true );
+			if ( choose == 2 ) break;
 		} while ( true );
 	}
 }

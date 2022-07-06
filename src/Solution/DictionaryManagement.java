@@ -1,6 +1,7 @@
 package Solution;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 import Solution.Dictionary;
@@ -47,7 +48,7 @@ public class DictionaryManagement {
 	
 	public void insertFromFile() {
         try {
-            File input = new File("C:\\Users\\Admin\\Documents\\English-Vietnamese-Dictionary\\data\\dictionaries.txt");
+            File input = new File(".\\data\\dictionaries.txt");
             Scanner sc = new Scanner(input, "UTF-8");
 
             while (sc.hasNext()) {
@@ -72,6 +73,7 @@ public class DictionaryManagement {
             }
             sc.close();
             System.out.println("Add words from file successful!");
+            dictionary.sortDictionary();
         }
         catch (IOException e) {
             System.out.println("File not found");
@@ -112,6 +114,87 @@ public class DictionaryManagement {
 			} while( true );
 			if ( choose == 2 ) break;
 		} while(true);
+	}
+	
+	public void editDictionary() throws Exception {
+		System.out.print("Enter word to edit: ");
+		String word = scan.nextLine().toLowerCase();
+		int index = -1;
+		for ( int i = 0; i < dictionary.get_list_word().size(); ++i ) {
+			if ( dictionary.get_list_word().get(i).get_word_target().toLowerCase().equals(word) ) {
+				index = i;
+				break;
+			}
+		}
+		if ( index == -1 ) {
+			System.out.println("No word found");
+		}
+		else {
+			int choose;
+			do {
+				System.out.println("1. Edit word target");
+				System.out.println("2. Edit word explain");
+				System.out.println("3. Add more words");
+				System.out.println("4. Delete word");
+				System.out.println("0. Back");
+				System.out.print("Enter number to choose: ");
+				choose = scan.nextInt();
+				scan.nextLine();
+				if ( choose != 1 && choose != 2 && choose != 3 && choose != 4 ) {
+					System.out.println("Something went wrong :(");
+					System.out.println("Please try again!");
+				}
+				else break;
+				
+			} while ( true );
+			
+			if ( choose == 1) {
+				System.out.print("Enter new word target: ");
+				word = scan.nextLine();
+				dictionary.get_list_word().get(index).set_word_target(word);
+			}
+			
+			else if ( choose == 2) {
+				System.out.print("Enter new word explain");
+				word = scan.nextLine();
+				dictionary.get_list_word().get(index).set_word_explain(word);
+			}
+			
+			else if ( choose == 3 ) {
+				insertFromCommandline();
+			}
+			
+			else if ( choose == 4 ) {
+				dictionary.get_list_word().remove(index);
+			}
+			
+			dictionary.sortDictionary();
+			System.out.println("Edit dictionary successful!");
+		}
+	}
+	
+	public void dictionaryExportToFile() {
+		try {
+			FileWriter file = new FileWriter(".\\data\\output.txt");
+			file.write("No        |English             |Vietnamese\n");
+			
+			for ( int i = 0; i < dictionary.get_list_word().size(); ++i ) {
+				file.write(Integer.toString(i + 1));
+				for ( int j = 1; j <= 10 - Integer.toString(i + 1).length(); ++j ) file.write(' ');
+				file.write('|');
+				int length = dictionary.get_list_word().get(i).get_word_target().length();
+				file.write(dictionary.get_list_word().get(i).get_word_target());
+				for ( int j = 1; j <= 20 - length; ++j ) file.write(' ');
+				file.write('|');
+				file.write(dictionary.get_list_word().get(i).get_word_explain());
+				file.write('\n');
+			}
+			file.close();
+			System.out.println("Export to file successful!");
+		}
+		catch(Exception e) {
+			System.out.println("No path found");
+		}
 	}
 	
 }

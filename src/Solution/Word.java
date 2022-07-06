@@ -17,7 +17,15 @@ public class Word {
 		return word_target;
 	}
 	
+	public void set_word_target(String word_target) {
+		this.word_target = word_target;
+	}
+	
 	public String get_word_explain() {
 		return word_explain;
+	}
+	
+	public void set_word_explain(String word_explain) {
+		this.word_target = word_explain;
 	}
 }
